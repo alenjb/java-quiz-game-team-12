@@ -1,5 +1,7 @@
 package Gui;
 
+import Client.Client;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -81,6 +83,7 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		Client client = new Client();
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 729, 557);
@@ -115,25 +118,23 @@ public class GUI {
 		btnGameStart.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		btnGameStart.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		btnGameStart.setBounds(570, 419, 113, 35);
+		inputNickname = new JTextField();
+		final String[] opponentName = {""};
 		btnGameStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 다음 패널로 이동
+				client.sendMessage(inputNickname.getText());
 				cardLayout.next(cardPanel);
 
-				// 2초 후에 세 번째 패널로 이동
-				timer = new Timer(2000, new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						cardLayout.show(cardPanel, "game");
-						timer.stop();
-					}
-				});
-				timer.start();
+				String message = client.waitMessage();
+				if (message.startsWith("name: ")) {
+					opponentName[0] = message.replace("name: ", "");
+					cardLayout.show(cardPanel, "game");
+				}
 			}
 		});
 		startView.add(btnGameStart);
 
-		inputNickname = new JTextField();
 		inputNickname.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		inputNickname.setBounds(138, 419, 134, 31);
 		startView.add(inputNickname);
@@ -220,13 +221,21 @@ public class GUI {
 		lblGameImage.setBounds(203, 55, 306, 327);
 		gameView.add(lblGameImage);
 
+		final int[] opponentScore = {0};
+
 		JButton btnAnswer = new JButton("정답");
 		btnAnswer.setBackground(new Color(255, 153, 102));
 		btnAnswer.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		btnAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// 다음 패널로 이동
-				cardLayout.next(cardPanel);
+				int score = 0;
+				client.sendMessage(String.format("score: %d", score));
+				String message = client.waitMessage();
+				if (message.startsWith("score: ")) {
+					opponentScore[0] = Integer.parseInt(message.replace("score: ", ""));
+					// 다음 패널로 이동
+					cardLayout.next(cardPanel);
+				}
 			}
 		});
 		btnAnswer.setBounds(313, 452, 86, 39);
