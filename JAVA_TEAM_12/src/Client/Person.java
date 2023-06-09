@@ -1,8 +1,8 @@
 package Client;
 
 public class Person {
-	String name;
-	String photo;
+	public String name;
+	public String photo;
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}
