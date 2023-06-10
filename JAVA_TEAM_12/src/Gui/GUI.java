@@ -152,48 +152,6 @@ public class GUI {
 		lblStartViewBackGround.setBounds(0, 0, 713, 518);
 		startView.add(lblStartViewBackGround);
 
-		// 2. 매칭화면
-		JPanel matchView = new JPanel();
-		frame.getContentPane().add(matchView, BorderLayout.CENTER);
-		matchView.setLayout(null);
-
-		lblUserName1 = new JLabel("사용자이름");
-		lblUserName1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUserName1.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
-		lblUserName1.setBackground(Color.BLACK);
-		lblUserName1.setBounds(12, 233, 244, 33);
-		matchView.add(lblUserName1);
-
-		lblVS = new JLabel("V S");
-		lblVS.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVS.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
-		lblVS.setBackground(new Color(0, 0, 0));
-		lblVS.setBounds(329, 237, 55, 23);
-		matchView.add(lblVS);
-
-		lblCounterUserName1 = new JLabel("상대사용자이름");
-		lblCounterUserName1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounterUserName1.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
-		lblCounterUserName1.setBackground(Color.BLACK);
-		lblCounterUserName1.setBounds(461, 233, 240, 33);
-		matchView.add(lblCounterUserName1);
-
-		txtGameStartInfo = new JTextField();
-		txtGameStartInfo.setBackground(new Color(250, 235, 215));
-		txtGameStartInfo.setForeground(new Color(0, 0, 0));
-		txtGameStartInfo.setEditable(false);
-		txtGameStartInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		txtGameStartInfo.setText("잠시 후 게임이 시작됩니다. ");
-		txtGameStartInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
-		txtGameStartInfo.setBounds(152, 422, 409, 33);
-		matchView.add(txtGameStartInfo);
-		txtGameStartInfo.setColumns(10);
-
-		lblMatchViewBackGround = new JLabel("");
-		lblMatchViewBackGround.setIcon(new ImageIcon(GUI.class.getResource("/image/sketch.png")));
-		lblMatchViewBackGround.setBounds(0, 0, 713, 518);
-		matchView.add(lblMatchViewBackGround);
-
 		// 3. 게임화면
 		JPanel gameView = new JPanel();
 		frame.getContentPane().add(gameView, BorderLayout.CENTER);
@@ -353,7 +311,6 @@ public class GUI {
 		endView.add(lblEndViewBackGround);
 
 		cardPanel.add(startView, "start");
-		cardPanel.add(matchView, "match");
 		cardPanel.add(gameView, "game");
 		cardPanel.add(endView, "end");
 		frame.getContentPane().add(cardPanel);
@@ -365,7 +322,6 @@ public class GUI {
 				comboBox = comboBoxGameCategory.getSelectedItem().toString();
 				// 다음 패널로 이동
 				buttonClick = true; // 시작 버튼 눌림
-				cardLayout.next(cardPanel);
 				while (!isReady) {
 					try {
 						Thread.sleep(500); // 일정 시간 대기 후 다시 확인
@@ -380,12 +336,9 @@ public class GUI {
 
 		btnAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("정답버튼을 누름");
 				// 다음 패널로 이동
 				if (buttonCount == 9) {
 					buttonCount++;
-					System.out.println("업데이트");
-					System.out.println(winner);
 					// 데이터가 다 오면 넘어가기
 					while (true) {
 						// 버튼 상태 확인
@@ -400,7 +353,6 @@ public class GUI {
 						}
 					}
 					updateEndPanel(endView);
-					System.out.println(winner);
 					cardLayout.next(cardPanel);
 				}
 				buttonCount++;
@@ -588,7 +540,6 @@ public class GUI {
 
 	public void setMyName(String myName) {
 		this.myName = myName;
-		System.out.println("바뀜" + this.myName);
 	}
 
 	public String getOppName() {
