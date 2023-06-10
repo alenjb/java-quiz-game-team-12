@@ -47,8 +47,10 @@ public class GUI {
 	private JTextField inputAnswer;
 	private JLabel lblMatchViewBackGround;
 	private JLabel lblVS;
-	private JLabel lblUserName;
-	private JLabel lblCounterUserName;
+	private JLabel lblUserName1;
+	private JLabel lblUserName2;
+	private JLabel lblCounterUserName1;
+	private JLabel lblCounterUserName2;
 	private CardLayout cardLayout;
 	private JPanel cardPanel;
 	private Timer timer;
@@ -60,6 +62,7 @@ public class GUI {
 	JLabel lblUserResult;
 	JLabel lblCounterUserResult;
 	JLabel lblWinerName;
+	JLabel lblNewLabel_2_1;
 	private int buttonCount=0; //버튼을 볓번 눌렀나
 	private String gameImage="/image/sonny.jpg"; //게임 이미지 주소
 	private int roundNo=1; //현재 라운드 정보
@@ -162,7 +165,7 @@ public class GUI {
 		comboBoxGameCategory.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		comboBoxGameCategory.setModel(new DefaultComboBoxModel(new String[] { "스포츠 선수", "배우", "가수", "정치인" }));
 		comboBoxGameCategory.setToolTipText("");
-		comboBoxGameCategory.setBounds(402, 419, 97, 31);
+		comboBoxGameCategory.setBounds(390, 419, 120, 31);
 		startView.add(comboBoxGameCategory);
 		
 
@@ -186,12 +189,12 @@ public class GUI {
 		frame.getContentPane().add(matchView, BorderLayout.CENTER);
 		matchView.setLayout(null);
 
-		lblUserName = new JLabel("사용자이름");
-		lblUserName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
-		lblUserName.setBackground(Color.BLACK);
-		lblUserName.setBounds(12, 233, 244, 33);
-		matchView.add(lblUserName);
+		lblUserName1 = new JLabel("사용자이름");
+		lblUserName1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUserName1.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
+		lblUserName1.setBackground(Color.BLACK);
+		lblUserName1.setBounds(12, 233, 244, 33);
+		matchView.add(lblUserName1);
 
 		lblVS = new JLabel("V S");
 		lblVS.setHorizontalAlignment(SwingConstants.CENTER);
@@ -200,12 +203,12 @@ public class GUI {
 		lblVS.setBounds(329, 237, 55, 23);
 		matchView.add(lblVS);
 
-		lblCounterUserName = new JLabel("상대사용자이름");
-		lblCounterUserName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounterUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
-		lblCounterUserName.setBackground(Color.BLACK);
-		lblCounterUserName.setBounds(461, 233, 240, 33);
-		matchView.add(lblCounterUserName);
+		lblCounterUserName1 = new JLabel("상대사용자이름");
+		lblCounterUserName1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounterUserName1.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
+		lblCounterUserName1.setBackground(Color.BLACK);
+		lblCounterUserName1.setBounds(461, 233, 240, 33);
+		matchView.add(lblCounterUserName1);
 
 		txtGameStartInfo = new JTextField();
 		txtGameStartInfo.setBackground(new Color(250, 235, 215));
@@ -320,21 +323,19 @@ public class GUI {
 		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblNewLabel_1_1.setBounds(474, 260, 28, 22);
 		endView.add(lblNewLabel_1_1);
-		if(!winner.equals("none")) {
-			JLabel lblNewLabel_2_1 = new JLabel("\t님이 승리하셨습니다.");
-			lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-			lblNewLabel_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-			lblNewLabel_2_1.setBounds(328, 374, 205, 22);
-			endView.add(lblNewLabel_2_1);			
-		}else { //비긴 경우
-			JLabel lblNewLabel_2_1 = new JLabel("\t님이 비겼습니다.");
-			lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-			lblNewLabel_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-			lblNewLabel_2_1.setBounds(328, 374, 205, 22);
-			endView.add(lblNewLabel_2_1);			
+		
+		lblNewLabel_2_1 = new JLabel("\t님이 승리하셨습니다.");
+		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		lblNewLabel_2_1.setBounds(328, 374, 205, 22);
+		endView.add(lblNewLabel_2_1);			
 			
-		}
-//		endView.add(lblWinerName);
+		lblWinerName = new JLabel("승리자");
+		lblWinerName.setHorizontalAlignment(SwingConstants.LEFT);
+		lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		lblWinerName.setBounds(210, 374, 189, 22);
+		
+		endView.add(lblWinerName);
 		
 
 		JButton btnExitButton = new JButton("게임 종료");
@@ -354,25 +355,25 @@ public class GUI {
 		lblNewLabel_2.setBounds(213, 260, 28, 22);
 		endView.add(lblNewLabel_2);
 
-		JLabel lblCounterUserName = new JLabel(oppName);
-		lblCounterUserName.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCounterUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-		lblCounterUserName.setBounds(12, 155, 189, 22);
-		endView.add(lblCounterUserName);
+		lblCounterUserName2 = new JLabel(oppName);
+		lblCounterUserName2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCounterUserName2.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		lblCounterUserName2.setBounds(12, 155, 189, 22);
+		endView.add(lblCounterUserName2);
 
-		JLabel lblUserName = new JLabel(myName);
-		lblUserName.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblUserName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-		lblUserName.setBounds(12, 260, 189, 22);
-		endView.add(lblUserName);
+		lblUserName2 = new JLabel("이름");
+		lblUserName2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUserName2.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		lblUserName2.setBounds(12, 260, 189, 22);
+		endView.add(lblUserName2);
 
-		JLabel lblCounterUserResult = new JLabel(oppScore+"");
+		lblCounterUserResult = new JLabel(oppScore+"");
 		lblCounterUserResult.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCounterUserResult.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblCounterUserResult.setBounds(420, 155, 53, 22);
 		endView.add(lblCounterUserResult);
 
-		JLabel lblUserResult = new JLabel(score+"");
+		lblUserResult = new JLabel(score+"");
 		lblUserResult.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUserResult.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblUserResult.setBounds(420, 260, 53, 22);
@@ -435,8 +436,24 @@ public class GUI {
 				System.out.println("정답버튼을 누름");
 				// 다음 패널로 이동
 				if(buttonCount ==9) {
-//					updateEndPanel(endView);
+					buttonCount++;
 					System.out.println("업데이트");
+					System.out.println(winner);
+	                //데이터가 다 오면 넘어가기
+					while (true) {
+	                    // 버튼 상태 확인 
+	                    if (!winner.equals("")) {
+	                    	break;
+	                    } else {
+	                        try {
+	                            Thread.sleep(100); // 일정 시간 대기 후 다시 확인
+	                        } catch (InterruptedException ea) {
+	                            ea.printStackTrace();
+	                        }
+	                    }
+	                }
+					updateEndPanel(endView);
+					System.out.println(winner);
 					cardLayout.next(cardPanel);					
 				}
 				buttonCount++;
@@ -461,24 +478,17 @@ public class GUI {
 	}
 	//마지막 패널 내용 업데이트
 	public void updateEndPanel(JPanel EndView) {
-		lblUserName.setText(myName);
-		lblCounterUserName.setText(oppName);
+		lblCounterUserName2.setText(oppName);
+		lblUserName2.setText(getMyName());
 		lblUserResult.setText(score+"");
 		lblCounterUserResult.setText(oppScore+"");
 		lblWinerName.setText(winner);
-		
 		if(!winner.equals("none")) {
-			lblWinerName = new JLabel(winner);
-			lblWinerName.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-			lblWinerName.setBounds(63, 374, 248, 22);
+			lblWinerName.setText(winner);
 						
 		}else {// 비긴 경우
-			lblWinerName = new JLabel(myName+"\t님과 "+oppName);
-			lblWinerName.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-			lblWinerName.setBounds(63, 374, 248, 22);
-			
+			lblWinerName.setText(myName+"\t\t님과 "+oppName);			
+			lblNewLabel_2_1.setText("님이 비겼습니다.");
 		}
 		
 		
@@ -526,21 +536,21 @@ public class GUI {
 	}
 
 	public JLabel getLblUserName() {
-		return lblUserName;
+		return lblUserName1;
 	}
 
-	public void setLblUserName(String lblUserName) {
-		JLabel label = new JLabel(lblUserName);
-		this.lblUserName = label;
+	public void setLblUserName(String lblUserName1) {
+		JLabel label = new JLabel(lblUserName1);
+		this.lblUserName1 = label;
 	}
 
 	public JLabel getLblCounterUserName() {
-		return lblCounterUserName;
+		return lblCounterUserName2;
 	}
 
 	public void setLblCounterUserName(String lblCounterUserName) {
 		JLabel label = new JLabel(lblCounterUserName);
-		this.lblUserName = label;
+		this.lblUserName1 = label;
 	}
 
 	public CardLayout getCardLayout() {
@@ -589,12 +599,12 @@ public class GUI {
 		this.gameImage = gameImage;
 	}
 
-	public void setLblUserName(JLabel lblUserName) {
-		this.lblUserName = lblUserName;
+	public void setLblUserName(JLabel lblUserName1) {
+		this.lblUserName1 = lblUserName1;
 	}
 
 	public void setLblCounterUserName(JLabel lblCounterUserName) {
-		this.lblCounterUserName = lblCounterUserName;
+		this.lblCounterUserName2 = lblCounterUserName;
 	}
 
 	public int getRoundNo() {
@@ -619,6 +629,7 @@ public class GUI {
 
 	public void setMyName(String myName) {
 		this.myName = myName;
+		System.out.println("바뀜"+this.myName);
 	}
 
 	public String getOppName() {

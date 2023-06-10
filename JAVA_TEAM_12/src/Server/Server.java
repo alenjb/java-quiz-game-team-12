@@ -48,7 +48,6 @@ public class Server {
                         startOn = true; // 시작버튼을 누름
                         synchronized (readyPlayer) {
                             readyPlayer.put(currentClientNo, msg); // 자신의 번호와 분야를 대기 명단에 추가
-                            System.out.println(readyPlayer.size());
 
                             System.out.println(currentClientNo + "번 클라이언트 선택 분야: " + clientMessage);
 

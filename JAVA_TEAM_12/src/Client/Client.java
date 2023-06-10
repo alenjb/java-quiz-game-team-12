@@ -86,6 +86,7 @@ public class Client {
 
         		System.out.println("문제: "+problem);
         		System.out.print("답 입력:  ");
+        		if(i==9) isButtonPressed =true;
         		//정답버튼 누를 때까지 멈추기
                 while (!isButtonPressed) {
 //                	System.out.println("확인");
@@ -112,6 +113,7 @@ public class Client {
         	String [] scores = in.readLine().split(";");
         	int myScore = Integer.parseInt(scores[0]); //나의 최종 점수 받아오기        	
         	int oppScore = Integer.parseInt(scores[1]); //상대방 최종 점수 받아오기
+        	window.setMyName(name); //내 이름 넘기기
         	window.setScore(myScore); //내 점수 넘기기
     		window.setOppScore(oppScore+""); //상대방 점수 넘기기
     		window.setOppName(oppName);// 상대방 이름 넘기기
@@ -127,6 +129,7 @@ public class Client {
         		System.out.println("비겼습니다");
         		
         	}
+        	
         	
         	
         } catch (IOException e) {
