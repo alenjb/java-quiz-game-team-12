@@ -163,7 +163,7 @@ public class GUI {
 		JComboBox comboBoxGameCategory = new JComboBox();
 		comboBoxGameCategory.setBackground(Color.WHITE);
 		comboBoxGameCategory.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		comboBoxGameCategory.setModel(new DefaultComboBoxModel(new String[] { "스포츠 선수", "배우", "가수", "정치인" }));
+		comboBoxGameCategory.setModel(new DefaultComboBoxModel(new String[] { "스포츠 선수", "배우", "가수", "예능" }));
 		comboBoxGameCategory.setToolTipText("");
 		comboBoxGameCategory.setBounds(390, 419, 120, 31);
 		startView.add(comboBoxGameCategory);
@@ -487,8 +487,10 @@ public class GUI {
 			lblWinerName.setText(winner);
 						
 		}else {// 비긴 경우
-			lblWinerName.setText(myName+"\t\t님과 "+oppName);			
-			lblNewLabel_2_1.setText("님이 비겼습니다.");
+			lblWinerName.setText(myName+"\t\t님과 "+oppName);
+			lblWinerName.setBounds(150, 374, 189, 22);
+			lblNewLabel_2_1.setText("\t님이 비겼습니다.");
+			
 		}
 		
 		
