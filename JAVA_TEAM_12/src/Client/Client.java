@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import Gui.GUI;
 
 public class Client {
-
     public static void main(String[] args) {
         try {
         	//GUI 생성
@@ -70,10 +69,11 @@ public class Client {
             if(!isReady.equals("ok")) {} //ok 싸인이 아니면
            
             System.out.println("게임 시작");
+            int score = 0;//현재 점수
             // 상대방이 들아올 때까지 대기
         	for(int i=0; i<10; i++) {
         		int roundNo= i+1; // 현재 라운드
-        		int score = 0; //현재 점수
+    
         		window.setRoundNo(roundNo); //라운드 정보 넘기기
         		window.setScore(score);
         		
@@ -86,12 +86,11 @@ public class Client {
 
         		System.out.println("문제: "+problem);
         		System.out.print("답 입력:  ");
-        		
-        		//버튼 누를 때까지 멈추기
+        		//정답버튼 누를 때까지 멈추기
                 while (!isButtonPressed) {
 //                	System.out.println("확인");
                     // 버튼 상태 확인 
-                    if (window.isAnswBtn()) {
+                    if (window.getButtonCount() == i+1) {
                         isButtonPressed = true;
                     } else {
                         try {
@@ -106,7 +105,6 @@ public class Client {
         		String answer = window.getInputAnswer(); //시용자 입력값 가져오기
         		//String answer = consoleReader.readLine();
         		out.println(answer); //답 보내기
-        		
         		String scoreResponse = in.readLine();
         		System.out.println("현재 점수: "+scoreResponse);                		
         		score = Integer.parseInt(scoreResponse); //현재 점수 저장

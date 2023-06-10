@@ -57,6 +57,9 @@ public class GUI {
 	JLabel lblGameImage;
 	JLabel lblRound;
 	JLabel lblScore;
+	JLabel lblUserResult;
+	JLabel lblCounterUserResult;
+	JLabel lblWinerName;
 	private int buttonCount=0; //버튼을 볓번 눌렀나
 	private String gameImage="/image/sonny.jpg"; //게임 이미지 주소
 	private int roundNo=1; //현재 라운드 정보
@@ -67,7 +70,7 @@ public class GUI {
 	private String oppScore=""; //상대방 점수
 	private boolean buttonClick =false; //시작버튼이 눌렸는지 체크
 	public boolean isReady =false; //client에서 매칭화면으로 넘어가도 되는지 신호를 받아서 주는 것
-	public boolean answBtn = false; //정답 버튼을 눌렀는지 체크
+//	public int answNum = 0; //몇번 정답 버튼을 눌렀는지 체크
 	
 
 	/**
@@ -238,22 +241,6 @@ public class GUI {
 		JButton btnAnswer = new JButton("정답");
 		btnAnswer.setBackground(new Color(255, 153, 102));
 		btnAnswer.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		btnAnswer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				answBtn =true;
-				System.out.println("정답버튼을 누름");
-				// 다음 패널로 이동
-				if(buttonCount ==9)
-					cardLayout.next(cardPanel);
-				buttonCount++;
-				try{Thread.sleep(100);}catch (Exception eee) { //잠깐 멈춤
-				}
-				updateGamePanel(gameView);
-				answBtn =false; //정답버튼 복구
-				System.out.println("정답버튼을 누르고 다시 false로");
-
-			}
-		});
 		btnAnswer.setBounds(313, 452, 86, 39);
 		gameView.add(btnAnswer);
 
@@ -347,6 +334,7 @@ public class GUI {
 			endView.add(lblNewLabel_2_1);			
 			
 		}
+//		endView.add(lblWinerName);
 		
 
 		JButton btnExitButton = new JButton("게임 종료");
@@ -389,21 +377,7 @@ public class GUI {
 		lblUserResult.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblUserResult.setBounds(420, 260, 53, 22);
 		endView.add(lblUserResult);
-		if(!winner.equals("none")) {
-			JLabel lblWinerName = new JLabel(winner);
-			lblWinerName.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-			lblWinerName.setBounds(63, 374, 248, 22);
-			endView.add(lblWinerName);			
-		}else {// 비긴 경우
-			JLabel lblWinerName = new JLabel(myName+"\t님과 "+oppName);
-			lblWinerName.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-			lblWinerName.setBounds(63, 374, 248, 22);
-			endView.add(lblWinerName);			
-			
-		}
-		
+
 
 		JLabel lblGameResultLabel = new JLabel("게임 결과");
 		lblGameResultLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 33));
@@ -455,13 +429,58 @@ public class GUI {
 				//timer.start();
 			}
 		});
+		
+		btnAnswer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("정답버튼을 누름");
+				// 다음 패널로 이동
+				if(buttonCount ==9) {
+//					updateEndPanel(endView);
+					System.out.println("업데이트");
+					cardLayout.next(cardPanel);					
+				}
+				buttonCount++;
+                try {
+                    Thread.sleep(100); // 일정 시간 대기 후 다시 확인
+                } catch (InterruptedException eeee) {
+                    eeee.printStackTrace();
+                }
+				updateGamePanel(gameView);
+
+			}
+		});
+
 
 	}
 	//게임 패널 내용 업데이트
 	public void updateGamePanel(JPanel gameView) {
-		lblGameImage.setIcon(new ImageIcon(GUI.class.getResource(gameImage)));
-		lblRound = new JLabel(roundNo + " / 10");
-		lblScore = new JLabel(score+"");
+		lblGameImage.setIcon(new ImageIcon(GUI.class.getResource(gameImage))); 
+		lblRound.setText(roundNo + " / 10");
+		lblScore.setText(score+"");
+		
+	}
+	//마지막 패널 내용 업데이트
+	public void updateEndPanel(JPanel EndView) {
+		lblUserName.setText(myName);
+		lblCounterUserName.setText(oppName);
+		lblUserResult.setText(score+"");
+		lblCounterUserResult.setText(oppScore+"");
+		lblWinerName.setText(winner);
+		
+		if(!winner.equals("none")) {
+			lblWinerName = new JLabel(winner);
+			lblWinerName.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+			lblWinerName.setBounds(63, 374, 248, 22);
+						
+		}else {// 비긴 경우
+			lblWinerName = new JLabel(myName+"\t님과 "+oppName);
+			lblWinerName.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+			lblWinerName.setBounds(63, 374, 248, 22);
+			
+		}
+		
 		
 	}
 	
@@ -633,7 +652,7 @@ public class GUI {
 	public void setButtonClick(boolean buttonClick) {
 		this.buttonClick = buttonClick;
 	}
-
+/*
 	public boolean isAnswBtn() {
 		return answBtn;
 	}
@@ -641,7 +660,7 @@ public class GUI {
 	public void setAnswBtn(boolean answBtn) {
 		this.answBtn = answBtn;
 	}
-	
+*/	
 	
 	
 }

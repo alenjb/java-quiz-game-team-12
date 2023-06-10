@@ -37,7 +37,8 @@ public class Server {
                         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                         boolean gameOn = false; // game 중이면 true;
                         boolean startOn = false; // start 버튼을 클라이언트가 누르면 true;
-                        boolean isReady =false; //둘 다 준비되었는지
+                        boolean isReady =false; //시작전: 둘 다 준비되었는지 ; 게임중: 정답버튼을 눌렀는지
+                        
 
                         String clientMessage = in.readLine(); // ;로 끊어서 닉네임과 분야 전송 받음
                         String[] msg = clientMessage.split(";"); // msg[0] = 닉네임 ; msg[1] = 분야
@@ -112,22 +113,11 @@ public class Server {
                                 out.println(problem); // 문제 보내기 (이름;사진)
 //기다리기
                                 /*조잡하지만 일단은 이렇게라도 해봄*/
-                                String answer;
-                                while (true) {
-                                    synchronized (lock) {
-                                        if (isReady) {
-                                            answer = in.readLine(); // 답 받아오기
-                                            break;
-                                        }
-                                    }
-                                    try {
-                                        Thread.sleep(500); // 0.5초 대기 후 다시 확인
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                
-                                //answer = in.readLine(); // 답 받아오기
+                                // 이전 answer 값 비우기
+                                // 기다리기
+                                String answer = in.readLine(); // 답 받아오기
+//                                in.readLine(); //버퍼 비우기
+
                                 System.out.println(answer+"aaa");
                                 if (answer.equals(pname)) { // 답이 맞으면
                                     score += 10; // 10점 더하기
@@ -135,7 +125,7 @@ public class Server {
 
                                 } else // 답이 틀리면
                                     out.println(score); // 점수를 더하지 않고 그대로 보내기
-                             
+                               
                                 
                             }// for문 끝(문제 끝)
                          //4) 내점수 입력
