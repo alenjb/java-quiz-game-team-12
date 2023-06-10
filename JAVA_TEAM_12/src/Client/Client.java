@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 
@@ -25,12 +27,12 @@ public class Client {
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
         	
     //시작 화면
-            boolean isButtonPressed =false; //gui의 시작버튼이 눌렸는지 체크하는 client의 변수
+            final boolean[] isButtonPressed = {false}; //gui의 시작버튼이 눌렸는지 체크하는 client의 변수
             // 버튼을 누를 때까지 대기
-            while (!isButtonPressed) {
+            while (!isButtonPressed[0]) {
                 // 버튼 상태 확인 
                 if (window.isButtonClick()) {//gui의 시작버튼이 눌렸는지 체크
-                    isButtonPressed = true;
+                    isButtonPressed[0] = true;
                 } else {
                     try {
                         Thread.sleep(500); // 일정 시간 대기 후 다시 확인
@@ -39,7 +41,7 @@ public class Client {
                     }
                 }
             }
-            isButtonPressed  =false; //원상 복귀
+            isButtonPressed[0] =false; //원상 복귀
             
             //닉네임 입력
             System.out.print("닉네임 입력: ");
@@ -59,7 +61,10 @@ public class Client {
 //1차 텀
             
             //상대방 닉네임 받아오기
-            String oppName = in.readLine();
+            String oppName = null;
+            while (oppName == null || oppName.isEmpty()) {
+                oppName = in.readLine();
+            }
             System.out.println("상대방: " + oppName);
             //누구랑 매치되었는지 띄우고 ok sign 보내기
             window.setLblUserName(name); // 자신의 이름 설정
@@ -86,13 +91,28 @@ public class Client {
 
         		System.out.println("문제: "+problem);
         		System.out.print("답 입력:  ");
-        		if(i==9) isButtonPressed =true;
+//        		if(i==9) isButtonPressed[0] =true;
+                final int[] count = {10};
+                Timer timer = new Timer();
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (count[0] > 0) {
+                            window.setLblTime(String.valueOf(count[0]));
+                            count[0]--;
+                        } else {
+                            timer.cancel();
+                            window.clickButton();
+                        }
+                    }
+                };
+                timer.schedule(timerTask, 0, 1000);
         		//정답버튼 누를 때까지 멈추기
-                while (!isButtonPressed) {
+                while (!isButtonPressed[0]) {
 //                	System.out.println("확인");
                     // 버튼 상태 확인 
                     if (window.getButtonCount() == i+1) {
-                        isButtonPressed = true;
+                        isButtonPressed[0] = true;
                     } else {
                         try {
                             Thread.sleep(100); // 일정 시간 대기 후 다시 확인
@@ -101,7 +121,8 @@ public class Client {
                         }
                     }
                 }
-                isButtonPressed = false;//원상복귀
+                isButtonPressed[0] = false;//원상복귀
+                timer.cancel();
                 
         		String answer = window.getInputAnswer(); //시용자 입력값 가져오기
         		//String answer = consoleReader.readLine();

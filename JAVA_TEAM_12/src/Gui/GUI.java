@@ -63,6 +63,8 @@ public class GUI {
 	JLabel lblCounterUserResult;
 	JLabel lblWinerName;
 	JLabel lblNewLabel_2_1;
+	JLabel lblTime;
+	JButton btnAnswer;
 	private int buttonCount=0; //버튼을 볓번 눌렀나
 	private String gameImage="/image/sonny.jpg"; //게임 이미지 주소
 	private int roundNo=1; //현재 라운드 정보
@@ -120,7 +122,7 @@ public class GUI {
 		cardLayout = new CardLayout();
 		cardPanel.setLayout(cardLayout);
 		
-		JLabel lblTime = new JLabel("10 초");
+		lblTime = new JLabel("10 초");
 
 		// 1. 시작화면
 		JPanel startView = new JPanel();
@@ -241,7 +243,7 @@ public class GUI {
 		lblGameImage.setBounds(203, 55, 306, 327);
 		gameView.add(lblGameImage);
 
-		JButton btnAnswer = new JButton("정답");
+		btnAnswer = new JButton("정답");
 		btnAnswer.setBackground(new Color(255, 153, 102));
 		btnAnswer.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
 		btnAnswer.setBounds(313, 452, 86, 39);
@@ -529,6 +531,10 @@ public class GUI {
 		this.lblMatchViewBackGround = lblMatchViewBackGround;
 	}
 
+	public void setLblTime(String time) {
+		lblTime.setText(time + " 초");
+	}
+
 	public JLabel getLblVS() {
 		return lblVS;
 	}
@@ -587,6 +593,10 @@ public class GUI {
 	}
 	public int getButtonCount() {
 		return buttonCount;
+	}
+
+	public void clickButton() {
+		btnAnswer.doClick();
 	}
 
 	public void setButtonCount(int buttonCount) {

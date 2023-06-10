@@ -6,11 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import Client.Category;
 
@@ -74,12 +70,16 @@ public class Server {
                         String oppArea = ""; // 상대방이 선택한 분야
                         int score = 0; // 게임 점수
 
-                        Set<Integer> keys = readyPlayer.keySet();
-                        for (Integer key : keys) {
-                            if (!key.equals(currentClientNo)) {// 클라이언트 번호가 내 번호가 아니면(상대방이면)
-                                oppNum = key;
-                                oppName = readyPlayer.get(key)[0];
-                                oppArea = readyPlayer.get(key)[1];
+                        while (oppName.isEmpty()) {
+                            Set<Integer> keys = readyPlayer.keySet();
+                            for (Integer key : keys) {
+                                if (!key.equals(currentClientNo)) {// 클라이언트 번호가 내 번호가 아니면(상대방이면)
+                                    if (Objects.nonNull(readyPlayer.get(key))) {
+                                        oppNum = key;
+                                        oppName = readyPlayer.get(key)[0];
+                                        oppArea = readyPlayer.get(key)[1];
+                                    }
+                                }
                             }
                         }
                         
