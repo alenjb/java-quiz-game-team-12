@@ -1,43 +1,24 @@
 package Gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
-import javax.swing.JSpinner;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
-import javax.swing.JToggleButton;
-import javax.swing.JList;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.Font;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.DropMode;
-import java.awt.Color;
-import javax.swing.JProgressBar;
-import javax.swing.JTabbedPane;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import javax.swing.SpringLayout;
-import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
 
 public class GUI {
 
@@ -55,7 +36,7 @@ public class GUI {
 	private JPanel cardPanel;
 	private Timer timer;
 	private String comboBox;
-	
+
 	JLabel lblGameImage;
 	JLabel lblRound;
 	JLabel lblScore;
@@ -65,22 +46,17 @@ public class GUI {
 	JLabel lblNewLabel_2_1;
 	JLabel lblTime;
 	JButton btnAnswer;
-	private int buttonCount=0; //버튼을 볓번 눌렀나
-	private String gameImage="/image/sonny.jpg"; //게임 이미지 주소
-	private int roundNo=1; //현재 라운드 정보
-	private int score=0; //현재 점수
-	private String myName=""; //자신의 닉네임
-	private String oppName=""; //상대방 닉네임
-	private String winner =""; //승자
-	private String oppScore=""; //상대방 점수
-	private boolean buttonClick =false; //시작버튼이 눌렸는지 체크
-	public boolean isReady =false; //client에서 매칭화면으로 넘어가도 되는지 신호를 받아서 주는 것
-//	public int answNum = 0; //몇번 정답 버튼을 눌렀는지 체크
-	
+	private int buttonCount = 0; // 버튼을 볓번 눌렀나
+	private String gameImage = "/image/sonny.jpg"; // 게임 이미지 주소
+	private int roundNo = 1; // 현재 라운드 정보
+	private int score = 0; // 현재 점수
+	private String myName = ""; // 자신의 닉네임
+	private String oppName = ""; // 상대방 닉네임
+	private String winner = ""; // 승자
+	private String oppScore = ""; // 상대방 점수
+	private boolean buttonClick = false; // 시작버튼이 눌렸는지 체크
+	public boolean isReady = false; // client에서 매칭화면으로 넘어가도 되는지 신호를 받아서 주는 것
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -102,16 +78,10 @@ public class GUI {
 		this.frame = frame;
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public GUI() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -121,7 +91,7 @@ public class GUI {
 		cardPanel = new JPanel();
 		cardLayout = new CardLayout();
 		cardPanel.setLayout(cardLayout);
-		
+
 		lblTime = new JLabel("10 초");
 
 		// 1. 시작화면
@@ -161,7 +131,7 @@ public class GUI {
 		lblNickname.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNickname.setBounds(36, 419, 97, 31);
 		startView.add(lblNickname);
-		
+
 		JComboBox comboBoxGameCategory = new JComboBox();
 		comboBoxGameCategory.setBackground(Color.WHITE);
 		comboBoxGameCategory.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
@@ -169,8 +139,6 @@ public class GUI {
 		comboBoxGameCategory.setToolTipText("");
 		comboBoxGameCategory.setBounds(390, 419, 120, 31);
 		startView.add(comboBoxGameCategory);
-		
-
 
 		JLabel lblGameInfo = new JLabel("인물퀴즈게임");
 		lblGameInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -183,8 +151,6 @@ public class GUI {
 		lblStartViewBackGround.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStartViewBackGround.setBounds(0, 0, 713, 518);
 		startView.add(lblStartViewBackGround);
-		
-
 
 		// 2. 매칭화면
 		JPanel matchView = new JPanel();
@@ -227,13 +193,11 @@ public class GUI {
 		lblMatchViewBackGround.setIcon(new ImageIcon(GUI.class.getResource("/image/sketch.png")));
 		lblMatchViewBackGround.setBounds(0, 0, 713, 518);
 		matchView.add(lblMatchViewBackGround);
-		
+
 		// 3. 게임화면
 		JPanel gameView = new JPanel();
 		frame.getContentPane().add(gameView, BorderLayout.CENTER);
 		gameView.setLayout(null);
-		
-
 
 		lblGameImage = new JLabel("");
 		lblGameImage.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -261,7 +225,7 @@ public class GUI {
 		inputAnswer.setBounds(203, 403, 306, 39);
 		gameView.add(inputAnswer);
 		inputAnswer.setColumns(10);
-		
+
 		lblRound = new JLabel(roundNo + " / 10");
 		lblRound.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRound.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
@@ -286,7 +250,7 @@ public class GUI {
 		lblScoreLabel.setBounds(560, 129, 121, 40);
 		gameView.add(lblScoreLabel);
 
-		lblScore = new JLabel(score+"");
+		lblScore = new JLabel(score + "");
 		lblScore.setHorizontalAlignment(SwingConstants.CENTER);
 		lblScore.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
 		lblScore.setBounds(560, 204, 121, 40);
@@ -298,15 +262,11 @@ public class GUI {
 		lblGameViewBackGround.setBounds(0, 0, 713, 518);
 		gameView.add(lblGameViewBackGround);
 
-		
-		
-		
 		// 4.종료화면
 		JPanel endView = new JPanel();
 		frame.getContentPane().add(endView, BorderLayout.CENTER);
 		endView.setLayout(null);
-		buttonClick = false; //버튼 안눌린 것으로 초기화
-
+		buttonClick = false; // 버튼 안눌린 것으로 초기화
 
 		JLabel lblNewLabel = new JLabel("\t님");
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
@@ -325,20 +285,19 @@ public class GUI {
 		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblNewLabel_1_1.setBounds(474, 260, 28, 22);
 		endView.add(lblNewLabel_1_1);
-		
+
 		lblNewLabel_2_1 = new JLabel("\t님이 승리하셨습니다.");
 		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_2_1.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblNewLabel_2_1.setBounds(328, 374, 205, 22);
-		endView.add(lblNewLabel_2_1);			
-			
+		endView.add(lblNewLabel_2_1);
+
 		lblWinerName = new JLabel("승리자");
 		lblWinerName.setHorizontalAlignment(SwingConstants.LEFT);
 		lblWinerName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblWinerName.setBounds(210, 374, 189, 22);
-		
+
 		endView.add(lblWinerName);
-		
 
 		JButton btnExitButton = new JButton("게임 종료");
 		btnExitButton.addActionListener(new ActionListener() {
@@ -369,18 +328,17 @@ public class GUI {
 		lblUserName2.setBounds(12, 260, 189, 22);
 		endView.add(lblUserName2);
 
-		lblCounterUserResult = new JLabel(oppScore+"");
+		lblCounterUserResult = new JLabel(oppScore + "");
 		lblCounterUserResult.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCounterUserResult.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblCounterUserResult.setBounds(420, 155, 53, 22);
 		endView.add(lblCounterUserResult);
 
-		lblUserResult = new JLabel(score+"");
+		lblUserResult = new JLabel(score + "");
 		lblUserResult.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUserResult.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblUserResult.setBounds(420, 260, 53, 22);
 		endView.add(lblUserResult);
-
 
 		JLabel lblGameResultLabel = new JLabel("게임 결과");
 		lblGameResultLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 33));
@@ -401,103 +359,90 @@ public class GUI {
 		frame.getContentPane().add(cardPanel);
 		// 초기에 보여줄 패널 설정
 		cardLayout.show(cardPanel, "start");
-		
-		
+
 		btnGameStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				comboBox= comboBoxGameCategory.getSelectedItem().toString();
+				comboBox = comboBoxGameCategory.getSelectedItem().toString();
 				// 다음 패널로 이동
-				buttonClick= true; //시작 버튼 눌림
+				buttonClick = true; // 시작 버튼 눌림
 				cardLayout.next(cardPanel);
-	            while (!isReady) {
-                    try {
-                        Thread.sleep(500); // 일정 시간 대기 후 다시 확인
-                    } catch (InterruptedException ee) {
-                        ee.printStackTrace();
-                    }
-	            }
-	            /*
-	            timer = new Timer(2000, new ActionListener() {
-	            	@Override
-	            	public void actionPerformed(ActionEvent e) {
-	            		cardLayout.show(cardPanel, "game");
-	            		timer.stop();
-	            	}
-	            });*/
-	            updateGamePanel(gameView);
-	            cardLayout.next(cardPanel);
-//	            buttonClick = false; //버튼 안눌린 것으로 초기화
-				// 2초 후에 세 번째 패널로 이동
-				
-				//timer.start();
+				while (!isReady) {
+					try {
+						Thread.sleep(500); // 일정 시간 대기 후 다시 확인
+					} catch (InterruptedException ee) {
+						ee.printStackTrace();
+					}
+				}
+				updateGamePanel(gameView);
+				cardLayout.next(cardPanel);
 			}
 		});
-		
+
 		btnAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("정답버튼을 누름");
 				// 다음 패널로 이동
-				if(buttonCount ==9) {
+				if (buttonCount == 9) {
 					buttonCount++;
 					System.out.println("업데이트");
 					System.out.println(winner);
-	                //데이터가 다 오면 넘어가기
+					// 데이터가 다 오면 넘어가기
 					while (true) {
-	                    // 버튼 상태 확인 
-	                    if (!winner.equals("")) {
-	                    	break;
-	                    } else {
-	                        try {
-	                            Thread.sleep(100); // 일정 시간 대기 후 다시 확인
-	                        } catch (InterruptedException ea) {
-	                            ea.printStackTrace();
-	                        }
-	                    }
-	                }
+						// 버튼 상태 확인
+						if (!winner.equals("")) {
+							break;
+						} else {
+							try {
+								Thread.sleep(100); // 일정 시간 대기 후 다시 확인
+							} catch (InterruptedException ea) {
+								ea.printStackTrace();
+							}
+						}
+					}
 					updateEndPanel(endView);
 					System.out.println(winner);
-					cardLayout.next(cardPanel);					
+					cardLayout.next(cardPanel);
 				}
 				buttonCount++;
-                try {
-                    Thread.sleep(100); // 일정 시간 대기 후 다시 확인
-                } catch (InterruptedException eeee) {
-                    eeee.printStackTrace();
-                }
+				try {
+					Thread.sleep(100); // 일정 시간 대기 후 다시 확인
+				} catch (InterruptedException eeee) {
+					eeee.printStackTrace();
+				}
 				updateGamePanel(gameView);
 
 			}
 		});
 
+	}
+
+	// 게임 패널 내용 업데이트
+	public void updateGamePanel(JPanel gameView) {
+		lblGameImage.setIcon(new ImageIcon(GUI.class.getResource(gameImage)));
+		lblRound.setText(roundNo + " / 10");
+		lblScore.setText(score + "");
 
 	}
-	//게임 패널 내용 업데이트
-	public void updateGamePanel(JPanel gameView) {
-		lblGameImage.setIcon(new ImageIcon(GUI.class.getResource(gameImage))); 
-		lblRound.setText(roundNo + " / 10");
-		lblScore.setText(score+"");
-		
-	}
-	//마지막 패널 내용 업데이트
+
+	// 마지막 패널 내용 업데이트
 	public void updateEndPanel(JPanel EndView) {
 		lblCounterUserName2.setText(oppName);
 		lblUserName2.setText(getMyName());
-		lblUserResult.setText(score+"");
-		lblCounterUserResult.setText(oppScore+"");
+		lblUserResult.setText(score + "");
+		lblCounterUserResult.setText(oppScore + "");
 		lblWinerName.setText(winner);
-		if(!winner.equals("none")) {
+		if (!winner.equals("none")) {
 			lblWinerName.setText(winner);
-						
-		}else {// 비긴 경우
-			lblWinerName.setText(myName+"\t\t님과 "+oppName);
+
+		} else {// 비긴 경우
+			lblWinerName.setText(myName + "\t\t님과 " + oppName);
 			lblWinerName.setBounds(150, 374, 189, 22);
 			lblNewLabel_2_1.setText("\t님이 비겼습니다.");
-			
+
 		}
-		
-		
+
 	}
-	
+	/*				getter, setter				*/
 	public JTextField getInputNickname() {
 		return inputNickname;
 	}
@@ -515,7 +460,7 @@ public class GUI {
 	}
 
 	public String getInputAnswer() {
-		
+
 		return inputAnswer.getText();
 	}
 
@@ -588,9 +533,11 @@ public class GUI {
 	public void setComboBox(String comboBox) {
 		this.comboBox = comboBox;
 	}
+
 	public String getComboBox() {
 		return this.comboBox;
 	}
+
 	public int getButtonCount() {
 		return buttonCount;
 	}
@@ -641,7 +588,7 @@ public class GUI {
 
 	public void setMyName(String myName) {
 		this.myName = myName;
-		System.out.println("바뀜"+this.myName);
+		System.out.println("바뀜" + this.myName);
 	}
 
 	public String getOppName() {
@@ -675,15 +622,5 @@ public class GUI {
 	public void setButtonClick(boolean buttonClick) {
 		this.buttonClick = buttonClick;
 	}
-/*
-	public boolean isAnswBtn() {
-		return answBtn;
-	}
 
-	public void setAnswBtn(boolean answBtn) {
-		this.answBtn = answBtn;
-	}
-*/	
-	
-	
 }
