@@ -1,4 +1,11 @@
 # project_Personality-Quiz-Game
+  
+  <img width="650" src ="https://github.com/alenjb/java-quiz-game-team-12/assets/46131631/fb0268d4-4843-44ae-9014-2fb762ac4fd0">
+
+  <img width="650" src="https://github.com/alenjb/java-quiz-game-team-12/assets/46131631/dc4ba3c1-9ed7-470c-94cb-77dfcb466366">
+
+  <img width="650" src="https://github.com/alenjb/java-quiz-game-team-12/assets/46131631/bc40fe38-fc83-45c2-afde-ab54481cda21">
+  
 
 ## 목차
 
